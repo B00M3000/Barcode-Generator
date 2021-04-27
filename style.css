@@ -2,6 +2,13 @@ body {
   background: lightyellow;
   text-align: center;
 }
+
+#barcode-scale {
+  min-width: 100px;
+  width: 50vw;
+  max-width: 300px;
+}
+
 .hidden {
   display: none;
 }

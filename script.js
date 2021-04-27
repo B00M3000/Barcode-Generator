@@ -1,29 +1,55 @@
 try {
   window.addEventListener('DOMContentLoaded', (event) => {
-    const input = document.getElementById('number')
+    const numberInput = document.getElementById('number')
     const barcodeContainer = document.getElementById('barcode-container')
     const barcode = document.getElementById('barcode')
-    
-    input.value = Cookies.get('lastValue')
+    const scaleInput = document.getElementById('barcode-scale')
+    const scaleValue = document.getElementById('scale-value')
 
-    input.addEventListener('input', (event) => {
-      Cookies.set('lastValue', input.value)
+    var barcodeWidth, barcodeHeight
+    
+    numberInput.value = Cookies.get('lastNumberValue')
+
+    numberInput.addEventListener('input', (event) => {
+      Cookies.set('lastNumberValue', numberInput.value)
       
-      if(input.value == "") barcodeContainer.classList.add('hidden')
+      if(numberInput.value == "") barcodeContainer.classList.add('hidden')
       
-      JsBarcode('#barcode', input.value, {
+      JsBarcode('#barcode', numberInput.value, {
         format: "CODE128",
         lineColor: "#000",
+        background: "lightyellow",
         width: 3,
         height: 75,
-        displayValue: false
+        displayValue: false,
       })
+
+      barcodeWidth = barcode.width
+      barcodeHeight = barcode.height
       
       barcodeContainer.classList.remove('hidden')
     })
     
-    const inputEvent = new Event('input')
-    input.dispatchEvent(inputEvent)
+    if(numberInput.value){
+      const inputEvent = new Event('input')
+      numberInput.dispatchEvent(inputEvent)
+    }
+
+    scaleInput.value = Cookies.get('lastScaleValue')
+
+    scaleInput.addEventListener('input', (event) => {
+      Cookies.set('lastScaleValue', scaleInput.value)
+      
+      scaleValue.innerHTML = `${scaleInput.value}%`
+
+      barcode.style.width = `${barcodeWidth * (scaleInput.value / 100.0)}px`
+      barcode.style.height = `${barcodeHeight * (scaleInput.value / 100.0)}px`
+    })
+
+    if(scaleInput.value){
+      const inputEvent = new Event('input')
+      scaleInput.dispatchEvent(inputEvent)
+    }
   })
 } catch (error) {
   console.log(error)
