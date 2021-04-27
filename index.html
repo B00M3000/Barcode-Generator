@@ -1,54 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <title>Lunch Card Barcode Generator</title>
+
+    <link href="favicon.ico" rel="icon" type="image/x-icon" />
+    <link href="favicon.ico" rel="shortcut icon" type="image/x-icon" />
+
+    <link href="style.css" rel="stylesheet" type="text/css" />
+
     <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.4/dist/JsBarcode.all.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
-    <script>
-      try {
-        window.addEventListener('DOMContentLoaded', (event) => {
-          const input = document.getElementById('number')
-          const barcodeContainer = document.getElementById('barcode-container')
-          const barcode = document.getElementById('barcode')
-          
-          input.value = Cookies.get('lastValue')
-
-          input.addEventListener('input', (event) => {
-            Cookies.set('lastValue', input.value)
-            
-            if(input.value == "") barcodeContainer.classList.add('hidden')
-            
-            JsBarcode('#barcode', input.value, {
-              format: "CODE128",
-              lineColor: "#000",
-              width: 3,
-              height: 75,
-              displayValue: false
-            })
-            
-            barcodeContainer.classList.remove('hidden')
-          })
-          
-          const inputEvent = new Event('input')
-          input.dispatchEvent(inputEvent)
-        })
-      } catch (error) {
-        console.log(error)
-      }
-    </script>
-    <style>
-      body {
-        background: lightyellow;
-        text-align: center;
-      }
-      .hidden {
-        display: none;
-      }
-    </style>
+    <script src="script.js"></script>
   </head>
   <body>
+    <h1>Lunch Card Barcode Generator</h1>
+    <p>Your last card number will be saved in your cookies. When you clear your cookies you will have to re-enter your card number. Otherwise your card number will auto save and load apon vistiting page. All information is stored locally.</p>
     <label for="number">Card Number: </label>
     <input type="number" id="number" />
-    <br><br><br>
+    <br><br>
     <div id="barcode-container" class="hidden">
       <img id="barcode"/>
     </div>

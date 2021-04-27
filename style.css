@@ -1,0 +1,7 @@
+body {
+  background: lightyellow;
+  text-align: center;
+}
+.hidden {
+  display: none;
+}
