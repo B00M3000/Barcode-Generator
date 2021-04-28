@@ -19,7 +19,7 @@ try {
         format: "CODE128",
         lineColor: "#000",
         background: "lightyellow",
-        width: 3,
+        width: 2,
         height: 75,
         displayValue: false,
       })
