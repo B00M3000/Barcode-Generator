@@ -1,6 +1,7 @@
 body {
   background: lightyellow;
   text-align: center;
+  font-family: "Courier New";
 }
 
 #barcode-scale {
