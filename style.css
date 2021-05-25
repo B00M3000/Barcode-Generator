@@ -4,6 +4,10 @@ body {
   font-family: "Courier New";
 }
 
+li {
+  list-style-type: none;
+}
+
 #barcode-scale {
   min-width: 100px;
   width: 50vw;
